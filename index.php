@@ -24,12 +24,22 @@
                 }else{
                     $page_1 = ($page * $per_page) - $per_page;
                 }
-                    $select_query_count = "SELECT * FROM posts";
+                
+                if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                            $select_query_count = "SELECT * FROM posts";
+                        }else{
+                            $select_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+                        }
+                    
                     $select_query_result = mysqli_query($connection,$select_query_count);
                     $count = mysqli_num_rows($select_query_result);
-                    $count = ceil($count / $per_page);
                     
-                    $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1,$per_page";
+                    if($count < 1){
+                        echo "<h1 class='text-center'>No posts available</h1>";
+                    }else{
+                        $count = ceil($count / $per_page);
+                    
+                    $query = "SELECT * FROM posts LIMIT $page_1,$per_page";
                     $select_all_posts = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_all_posts)){
                         $post_id = $row['post_id'];
@@ -40,7 +50,7 @@
                         $post_content = substr($row['post_content'], 0,200);
                         $post_status = $row['post_status'];
                         
-                        if($post_status == 'published'){ 
+                        
                         ?>
                 
 
@@ -80,4 +90,3 @@
             ?>
         </ul>
 <?php include "includes/footer.php";?>
-

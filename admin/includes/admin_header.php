@@ -48,6 +48,7 @@ if(!isset($_SESSION['user_role'])){
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 
 </head>

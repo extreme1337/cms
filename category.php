@@ -15,11 +15,19 @@
                     if(isset($_GET['category'])){
                     $post_category = $_GET['category'];        
                         
-                    }
+                    
+                    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                            $query = "SELECT * FROM posts WHERE post_category_id = $post_category ";
+                        }else{
+                            $query = "SELECT * FROM posts WHERE post_category_id = $post_category AND post_status = 'published'";
+                        }
                 
-                
-                    $query = "SELECT * FROM posts WHERE post_category_id = $post_category";
+//                    $query = "SELECT * FROM posts WHERE post_category_id = $post_category AND post_status = 'published'";
                     $select_all_posts = mysqli_query($connection, $query);
+                        
+                    if(mysqli_num_rows($select_all_posts) < 1){
+                        echo "<h1 class='text-center'>No posts available</h1>";
+                    }else{
                     while($row = mysqli_fetch_assoc($select_all_posts)){
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
@@ -55,6 +63,7 @@
                     
                     
                 <?php }
+                    }}
                 
                 
                 

@@ -18,10 +18,21 @@
                         $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id";
                         $send_query = mysqli_query($connection,$view_query);
                         confirm($send_query);
+                        
+                        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                            $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+                        }else{
+                            $query = "SELECT * FROM posts WHERE post_id = $the_post_id AND post_status = 'published'";
+                        }
                 
                 
-                        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+                        
                         $select_all_posts = mysqli_query($connection, $query);
+                        
+                        if(mysqli_num_rows($select_all_posts) < 1){
+                            echo "<h1 class='text-center'>No posts available</h1>";
+                        }else{
+                        
                         while($row = mysqli_fetch_assoc($select_all_posts)){
                             $post_title = $row['post_title'];
                             $post_author = $row['post_author'];
@@ -31,7 +42,7 @@
                         
                         ?>
                     <h1 class="page-header">
-                    Page Heading
+                    Posts
                 </h1>
 
                 <!-- First Blog Post -->
@@ -47,9 +58,7 @@
                 <hr>
                 <p><?php echo $post_content ?></p>  
                 <hr>       
-                <?php }}else{
-                        header("Location: index.php");
-                    } ?>
+                <?php } ?>
                 <!-- Blog Comments -->
 
                <?php
@@ -132,7 +141,10 @@
                         <?php echo $comment_content ?>
                     </div>
                 </div>
-                <?php } ?>
+                <?php }}
+                    }else{
+                        header("Location: index.php");
+                    } ?>
                
                
                
