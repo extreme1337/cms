@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS Front</a>
+                <a class="navbar-brand" href="/cms/">CMS Front</a>
             </div>
             
             
@@ -20,7 +20,7 @@
                 <ul class="nav navbar-nav">
                    
                    <?php 
-                    $query = "SELECT * FROM categories";
+                    $query = "SELECT * FROM categories LIMIT 3";
                     $select_all_categories_query = mysqli_query($connection,$query);
                     while($row = mysqli_fetch_assoc($select_all_categories_query)){
                         $cat_title = $row['cat_title'];
@@ -39,14 +39,14 @@
                         }else if($page_name == $contact_page){
                             $contact_class = 'active';
                         }
-                        echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
+                        echo "<li class='$category_class'><a href='/cms/category/{$cat_id}'>{$cat_title}</a></li>";
                     }
                     ?>
                     <?php if(isset($_SESSION['user_role'])){ ?>
-                    <li><a href="admin">Admin</a></li>
+                    <li><a href="/cms/admin">Admin</a></li>
                     <?php }?>
-                    <li class="<?php echo $registration_class; ?>"><a href="registration.php">Registration</a></li>
-                    <li class="<?php echo $contact_class; ?>"><a href="contact.php">Contact</a></li>
+                    <li class="<?php echo $registration_class; ?>"><a href="/cms/registration">Registration</a></li>
+                    <li class="<?php echo $contact_class; ?>"><a href="/cms/contact">Contact</a></li>
                     <?php
                     if(isset($_SESSION['user_role'])) {
                         if(isset($_GET['p_id'])) {
