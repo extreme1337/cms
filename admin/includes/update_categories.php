@@ -10,18 +10,21 @@
                 $cat_id = $row['cat_id'];
                 $cat_title = $row['cat_title'];                  
         ?>
-        <input value="<?php if(!isset($cat_title)){echo $cat_title;} ?>" type="text" class="form-control" name="cat_title">
+        <input value="<?php echo $cat_title; ?>" type="text" class="form-control" name="cat_title">
         <?php
             }}                                    
         ?>
         <?php                             
             if(isset($_POST['update_category'])){
                 $cat_id_update = $_POST['cat_title'];
-                $query = "UPDATE categories SET cat_title = '{$cat_id_update}' WHERE cat_id = {$cat_id}";
-                $result_update = mysqli_query($connection,$query);
-                if(!$result_update){
-                    die("QUERY FAILED" . mysqli_error($connection));
-                }
+                $stmt = mysqli_prepare($connection, "UPDATE categories SET cat_title = ? WHERE cat_id=?");
+                //$query = "UPDATE categories SET cat_title = '{$cat_id_update}' WHERE cat_id = {$cat_id}";
+                mysqli_stmt_bind_param($stmt, 'si', $cat_id_update, $cat_id);
+                mysqli_stmt_execute($stmt);
+                confirm($stmt);
+                redirect("categories.php");
+                mysqli_stmt_close($stmt);
+                
             }                                       
         ?>                                    
     </div>

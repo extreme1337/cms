@@ -1,5 +1,5 @@
 <?php include "db.php"; ?>
-
+<?php ob_start();?>
 <?php session_start(); ?>
 
 
