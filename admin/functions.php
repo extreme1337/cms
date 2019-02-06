@@ -156,7 +156,8 @@ function email_exists($email){
 }
 
 function redirect($location){
-    return header("Location: ".$location);
+    header("Location: ".$location);
+    exit;
 }
 
 function register_user($username,$email,$password){
@@ -189,9 +190,7 @@ function login_user($username,$password){
     
     $query = "SELECT * FROM users WHERE username = '{$username}' ";
     $result = mysqli_query($connection,$query);
-    if(!$result){
-        die("FAILED ".mysqli_error($connection));
-    }
+    confirm($result);
     
     while($row = mysqli_fetch_array($result)){
         $db_user_id = $row['user_id'];
@@ -200,21 +199,55 @@ function login_user($username,$password){
         $db_user_firstname = $row['user_firstname'];
         $db_user_lastname = $row['user_lastname'];
         $db_user_role = $row['user_role'];
+        
+        if(password_verify($password,$db_user_password)){
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;    
+            redirect("/cms/admin");
+        }else{
+            return false;   
+        }
+        return true;
   
-    }
-
-    if(password_verify($password,$db_user_password)){
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
-        $_SESSION['user_role'] = $db_user_role;    
-        redirect("/cms/admin");
-    }else{
-        redirect("/cms/index.php");    
     }
 }
 
+function ifItIsMethod($method=null){
+    if($_SERVER['REQUEST_METHOD'] == strtoupper($method)){
+        return true;
+    }
+    return false;
+}
 
+function isLoggedIn(){
+    if(isset($_SESSION['user_role'])){
+        return true;
+    }
+    return false;
+}
+
+function checkIfUserIsLoggedInAndRedirect($redirectLocation){
+    if(isLoggedIn()){
+        redirect($redirectLocation);
+    }
+}
+
+function currentUser(){
+    if(isset($_SESSION['username'])){
+        return $_SESSION['username'];
+    }
+    return false;
+}
+
+function imagePlaceholder($image = null){
+    if(!$image){
+        return 'image_4.jpg';
+    }else{
+        return $image;
+    }
+}
 
 
 

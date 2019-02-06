@@ -1,0 +1,17 @@
+{
+    "name": "aeon/cms",
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    },
+    "autoload": {
+      "classmap": [
+          "classes"
+      ]
+    },
+    "authors": [
+        {
+            "name": "Marko Miseljic",
+            "email": "marko.miseljic.14@gmail.com"
+        }
+    ]
+}
