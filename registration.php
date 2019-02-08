@@ -3,6 +3,22 @@
  
  
 <?php 
+require 'vendor/autoload.php';
+use Symfony\Component\Dotenv\Dotenv;
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
+
+$options = array(
+    'cluster' => 'mt1',
+    'useTLS' => true
+  );
+$pusher = new Pusher\Pusher(getenv('APP_KEY'), getenv('APP_SECRET'), getenv('APP_ID'), $options);
+
+
+
+
+
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = trim($_POST['username']);
     $email    = trim($_POST['email']);
@@ -39,6 +55,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }
     if(empty($error)){
         register_user($username,$email,$password);
+        $data['message'] = $username;
+        $pusher->trigger('notifications','new_user',$data);
         login_user($username,$password);
     }
     
