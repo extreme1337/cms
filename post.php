@@ -1,6 +1,37 @@
 <?php include "includes/db.php";?>
 <?php include "includes/header.php";?>
 <?php include "includes/navigation.php";?>
+<?php 
+if(isset($_POST['liked'])) {
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+    $query = "SELECT * FROM posts WHERE post_id=$post_id";
+    $postResult = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($postResult);
+    $likes = $post['likes'];
+    
+    
+    mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id=$post_id");
+    
+    mysqli_query($connection, "INSERT INTO likes(user_id, post_id) VALUES($user_id, $post_id)");
+    exit();
+}
+if(isset($_POST['unliked'])) {
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+    
+    $query = "SELECT * FROM posts WHERE post_id=$post_id";
+    $postResult = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($postResult);
+    $likes = $post['likes'];
+    
+    
+    mysqli_query($connection, "DELETE FROM likes WHERE post_id=$post_id AND user_id=$user_id");
+    
+    mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id=$post_id");
+    exit();
+}
+?>
 
     <!-- Page Content -->
     <div class="container">
@@ -57,7 +88,31 @@
                 <hr>
                 <img class="img-responsive" src="/cms/images/<?php echo imagePlaceholder($post_image);;?>" alt="">
                 <hr>
-                <p><?php echo $post_content ?></p>  
+                <p><?php echo $post_content ?></p> 
+                 
+                <?php
+                if(isLoggedIn()){
+                ?>
+                <hr>
+                <div class="row">
+                        <p class="pull-right"><a
+                                class="<?php echo userLikedThisPost($the_post_id) ? 'unlike' : 'like'; ?>"
+                                href=""><span class="glyphicon glyphicon-thumbs-up"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="<?php echo userLikedThisPost($the_post_id) ? ' I liked this before' : 'Want to like it?'; ?>"></span>
+                                <?php echo userLikedThisPost($the_post_id) ? ' Unlike' : ' Like'; ?>
+                            </a></p>
+                    </div>
+                <?php }else{ ?>
+                        <div class="row">
+                            <p class="pull-right login-to-post">You need to <a href="/cms/login.php">login</a> to like</p>
+                        </div>
+                <?php } ?>
+                <div class="row">
+                    <p class="pull-right likes">Like: <?php getPostlikes($the_post_id);?> </p>
+                </div>
+                <div class="clearfix"></div>
                 <hr>       
                 <?php } ?>
                 <!-- Blog Comments -->
@@ -159,4 +214,38 @@
         <!-- /.row -->
         <hr>
 <?php include "includes/footer.php";?>
+<script>
+    
+    $(document).ready(function(){
+        $("[data-toggle='tooltip']").tooltip();
+        var post_id = <?php echo $the_post_id; ?>;
+        var user_id = <?php echo loggedInUserId(); ?>;
+        $('.like').click(function(){
+                    $.ajax({
+                        url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                        type: 'post',
+                        data: {
+                            'liked': 1,
+                            'post_id': post_id,
+                            'user_id': user_id
+                        }
+                    });
+                });
+        
+        $('.unlike').click(function(){
+                    $.ajax({
+                        url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                        type: 'post',
+                        data: {
+                            'unliked': 1,
+                            'post_id': post_id,
+                            'user_id': user_id
+                        }
+                    });
+                });
+    });
+
+    
+        
+</script>
 
