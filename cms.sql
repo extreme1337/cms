@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2019 at 12:05 AM
+-- Generation Time: Feb 12, 2019 at 03:05 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -72,6 +72,26 @@ INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_author`, `comm
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES
+(14, 3, 5),
+(19, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -87,27 +107,29 @@ CREATE TABLE `posts` (
   `post_tags` varchar(255) NOT NULL,
   `post_comment_count` int(11) NOT NULL,
   `post_status` varchar(255) NOT NULL DEFAULT 'draft',
-  `post_views_count` int(11) NOT NULL
+  `post_views_count` int(11) NOT NULL,
+  `likes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_user`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`, `post_views_count`) VALUES
-(1, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 5, 'published', 104),
-(5, 1, 'Javascript', 'Pera Peric', '', '2019-01-30', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 7),
-(8, 1, 'asd', 'asd', '', '2019-01-30', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 1),
-(9, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0),
-(10, 3, 'CMS Course is awesome', 'Pera Peric', 'asd', '2019-02-04', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 5),
-(11, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 1),
-(12, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0),
-(13, 2, 'Javascript', 'Pera Peric', 'llazic', '2019-02-04', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 3),
-(14, 1, 'Javascript', 'Pera Peric', 'pera', '2019-02-04', 'image_4.jpg', '<p>asdasd</p>', 'edwin, javascript, php,', 0, 'published', 0),
-(24, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0),
-(25, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0),
-(26, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0),
-(27, 1, 'asd', '', 'pperic', '2019-02-06', 'lambo_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0);
+INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_user`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`, `post_views_count`, `likes`) VALUES
+(1, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 5, 'published', 531, 12),
+(5, 1, 'Javascript', 'Pera Peric', '', '2019-01-30', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 15, 1),
+(8, 1, 'asd', 'asd', '', '2019-01-30', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 1, 0),
+(9, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
+(10, 3, 'CMS Course is awesome', 'Pera Peric', 'asd', '2019-02-04', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 5, 0),
+(11, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 1, 0),
+(12, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
+(13, 2, 'Javascript', 'Pera Peric', 'llazic', '2019-02-04', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 3, 0),
+(14, 1, 'Javascript', 'Pera Peric', 'pera', '2019-02-04', 'image_4.jpg', '<p>asdasd</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
+(24, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
+(25, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
+(26, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
+(27, 1, 'asd', '', 'pperic', '2019-02-06', 'lambo_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 19, 7),
+(28, 3, '', '', 'pperic', '2019-02-10', 'steam.jpg', '<p>asdadasdasdasd</p><p>asd</p><p>asd</p><p>asd</p><p>dsa</p><p>&nbsp;</p>', 'asd', 0, 'published', 62, 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +166,12 @@ INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstname`, `
 (12, 'peteee', '$2y$12$Ldtao4XU1xTvYiMcVNVIV.Bd1rctBHTl1FgPDk8ITxaVZIxNyW7v.', 'Pete', 'William', 'pete@gmail.com', '', 'admin', '$2y$10$Iusesomecrazystrings22', ''),
 (14, 'asdasdsd', '$2y$12$nzA.5uqo.qjqxkanEG.bKeqFpLr4wz2Olhh6SulXxhkybF0ZTwh56', '', '', 'asd@asd.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
 (15, '1234', '$2y$12$EmWd42peuZqMqAR9P9zoaOcCjO9qS9nKSTI7nAIcloaPOYcdrr3cq', '', '', 'marko.miseljic.14@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
-(16, 'jovan', '$2y$12$EF1GDyPZqiCcG82QUhix9eGzk4qfOgIZrstun0dI4YRHOx69F707e', '', '', 'jovan@jovan.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', '');
+(16, 'jovan', '$2y$12$EF1GDyPZqiCcG82QUhix9eGzk4qfOgIZrstun0dI4YRHOx69F707e', '', '', 'jovan@jovan.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(17, 'zikici', '$2y$12$pnUYT0VhavN5MuxshuUFw.bn.b1K6QxfRr9HkWu4FJkM6utrqfr1m', '', '', 'zikici@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(18, 'perici', '$2y$12$U3kNRaCnzayuTBA//c7w3.0/8UZS4YuHnuuq8huPE.rMPTNruMHUq', '', '', 'perici@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(19, 'zzikici', '$2y$12$ks08frroycOWTB78BFK.ReFUBuX2WGlQDEOgfmXcUdayAQ.NFHHgq', '', '', 'zzikici@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(20, 'opaggg', '$2y$12$x4j6S45W1fnY6EjY5DqpyOPZynpnriFd5pihVu/4p6xQ6s7B65e32', '', '', 'opaggg@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(21, 'markovic', '$2y$12$7q8Iv5b7pAhp/JuHjldPveUWlbW/Q3ocd.VgiKIJytou4MZIPnIdq', '', '', 'mmarkovic@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', '');
 
 -- --------------------------------------------------------
 
@@ -177,7 +204,16 @@ INSERT INTO `users_online` (`id`, `session`, `time`) VALUES
 (12, 'fl27ih34lllfnq4rufbbhj18ms', 1549303121),
 (13, 'gjic19ikmf9jpdjtij7o0hjpd7', 1549314768),
 (14, 'l8rsu5mibj4gena87ai85c1vq1', 1549451204),
-(15, 'ojgt9ov7jf46gjgekplvil6hae', 1549493902);
+(15, 'ojgt9ov7jf46gjgekplvil6hae', 1549493902),
+(16, 'pcrjm1hat9blft91fnusprtc36', 1549624341),
+(17, 'r439l0ped0p2fpneb1bt849pb4', 1549622026),
+(18, 'j7k0ajp80caqqo85ropt206prs', 1549622116),
+(19, 'ohic4fljlv0vr8n4rajjs19gd9', 1549622706),
+(20, '6140atgv58gffvd7ntum87ferg', 1549624332),
+(21, 'crtfhguohh5v414d0g9qlb3kif', 1549801766),
+(22, 'a3mr9modo4bdtcfhkivma5i17m', 1549824334),
+(23, '64gs0515kthef8gbkca0qua7uk', 1549823173),
+(24, 'ukb8jr9hksiu9vt828a8aeqtmh', 1549980344);
 
 --
 -- Indexes for dumped tables
@@ -194,6 +230,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `posts`
@@ -231,22 +273,28 @@ ALTER TABLE `comments`
   MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users_online`
 --
 ALTER TABLE `users_online`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
