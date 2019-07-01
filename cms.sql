@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2019 at 03:05 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Jul 01, 2019 at 02:34 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -116,20 +116,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_user`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`, `post_views_count`, `likes`) VALUES
-(1, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 5, 'published', 531, 12),
-(5, 1, 'Javascript', 'Pera Peric', '', '2019-01-30', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 15, 1),
-(8, 1, 'asd', 'asd', '', '2019-01-30', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 1, 0),
-(9, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
-(10, 3, 'CMS Course is awesome', 'Pera Peric', 'asd', '2019-02-04', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 5, 0),
-(11, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 1, 0),
-(12, 1, 'CMS Course is awesome', 'Pera Peric', '', '2019-01-30', 'image_1.jpg', '<p>WOW I really like this course</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
-(13, 2, 'Javascript', 'Pera Peric', 'llazic', '2019-02-04', 'image_5.jpg', '<p>asdasd</p>', 'edwin, javascript, php, oop', 0, 'published', 3, 0),
-(14, 1, 'Javascript', 'Pera Peric', 'pera', '2019-02-04', 'image_4.jpg', '<p>asdasd</p>', 'edwin, javascript, php,', 0, 'published', 0, 0),
-(24, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
-(25, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
-(26, 1, 'asd', 'asd', '', '2019-02-04', 'image_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 0, 0),
-(27, 1, 'asd', '', 'pperic', '2019-02-06', 'lambo_1.jpg', '<p>asd</p>', 'asd', 0, 'published', 19, 7),
-(28, 3, '', '', 'pperic', '2019-02-10', 'steam.jpg', '<p>asdadasdasdasd</p><p>asd</p><p>asd</p><p>asd</p><p>dsa</p><p>&nbsp;</p>', 'asd', 0, 'published', 62, 1);
+(28, 3, '', '', 'pperic', '2019-02-10', 'steam.jpg', '<p>asdadasdasdasd</p><p>asd</p><p>asd</p><p>asd</p><p>dsa</p><p>&nbsp;</p>', 'asd', 0, 'published', 62, 1),
+(29, 1, 'New Post', '', 'ric', '2019-07-01', 'image_3.jpg', '<p>&nbsp;</p>', 'Bootstrap', 0, 'draft', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -159,7 +147,7 @@ INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstname`, `
 (3, 'pperic', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', 'Pera', 'Peric', 'pperic@gmail.com', '', 'admin', '', '08d62f336293269e2dba57265a3793ff4760ed08cb68ddee7e545203b33738184c7e275d2bc901226f18302d0bb60f27ea9c'),
 (6, 'zzikic', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', 'Zika', 'Zikic', 'zzikic@gmail.com', '', 'subscriber', '', ''),
 (7, 'llazic', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', 'Laza', 'Lazic', 'llazic@gmail.com', '', 'admin', '$2y$10$Iusesomecrazystrings22', ''),
-(8, 'pera', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', '', '', 'peralazic@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
+(8, 'pera', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', '', '', 'peralazic@gmail.com', '', 'admin', '$2y$10$Iusesomecrazystrings22', ''),
 (9, 'mmarkovic', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', '', '', 'markomarkovic@gmail.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
 (10, 'asd', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', '', '', 'asd@asd.asd', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
 (11, 'new_user', '$2y$12$HGdj8ZULmOV5qHyMdqKlouQGt.VHCCdPWH7AJpi2XqHAvW3g5GJhy', '', '', 'new@user.com', '', 'subscriber', '$2y$10$Iusesomecrazystrings22', ''),
@@ -213,7 +201,8 @@ INSERT INTO `users_online` (`id`, `session`, `time`) VALUES
 (21, 'crtfhguohh5v414d0g9qlb3kif', 1549801766),
 (22, 'a3mr9modo4bdtcfhkivma5i17m', 1549824334),
 (23, '64gs0515kthef8gbkca0qua7uk', 1549823173),
-(24, 'ukb8jr9hksiu9vt828a8aeqtmh', 1549980344);
+(24, 'ukb8jr9hksiu9vt828a8aeqtmh', 1549980344),
+(25, 'bjtopnu5t22mkjj2mnamhbh0p6', 1561984466);
 
 --
 -- Indexes for dumped tables
@@ -282,7 +271,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -294,7 +283,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_online`
 --
 ALTER TABLE `users_online`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
